@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Starter VueJS!</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	
+	<div id="app">
+		<div class="stats">
+			<div class="playerStats" v-for="p in players">
+				<h1>{{ p.name }}</h1>
+				<div class="healthBarWrapper">
+					<span class="healthBarCurrent" 
+						:style="{width: p.health + '%'}"
+						:class="{critical: p.critical}">{{ p.health }}</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="controls">
+			<template v-if="!inGame">
+				<button @click="startGame" class="newGame">START A NEW GAME</button>
+			</template>
+			<template v-else>
+				<button @click="attack" class="att">ATTACK</button>
+				<button @click="specialAtt" class="specialAtt">SPECIAL ATTACK</button>
+				<button @click="heal" class="heal">HEAL</button>
+				<button @click="giveUp" class="giveUp">GIVE UP</button>
+			</template>
+		</div>
+
+		<div class="log">
+			<ul>
+				<li v-for="v in actionLog">
+					<p class="entry blue">Player hits Monster for {{ v.player }}</p>
+					<p class="entry red">Monser hits Player for {{ v.monster }}</p>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+
+
+	<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
